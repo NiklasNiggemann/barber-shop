@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { Appointment } from '../models/appointment';
 import { AppointmentService } from '../services/appointment.service';
 import { ActivatedRoute, Router } from '@angular/router';
-import { FormControl, FormGroup, ReactiveFormsModule } from '@angular/forms';
+import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EmployeeSingleSelectComponent } from "../employee-single-select/employee-single-select.component";
 
@@ -16,6 +16,7 @@ export class AppointmentEditComponent {
 
   id!: number;
 	appointment!: Appointment;
+  form!: FormGroup;
 
 	constructor(private router: Router, private appointmentService: AppointmentService, private route: ActivatedRoute) { }
 
@@ -28,26 +29,21 @@ export class AppointmentEditComponent {
       this.appointment = new Appointment(0, new Date(), "", "");
     }
 
-    this.form.setValue({
-      "customerName": this.appointment.customerName,
-      "serviceType": this.appointment.serviceType,
-      "date": this.appointment.date,
-      "employee": this.appointment.employee
-    })
+    this.  form = new FormGroup({
+      customerName: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      serviceType: new FormControl("", [Validators.required, Validators.minLength(3)]),
+      date: new FormControl(new Date(), [Validators.required]),
+      employee: new FormControl()
+    });
   }
   
-  form = new FormGroup({
-    customerName: new FormControl(),
-    serviceType: new FormControl(),
-    date: new FormControl(),
-    employee: new FormControl()
-  });
+
 
 	onSubmit() {
-		this.appointment.customerName = this.form.controls.customerName.value;
-    this.appointment.serviceType = this.form.controls.serviceType.value;
-    this.appointment.date = this.form.controls.date.value;
-    this.appointment.employee = this.form.controls.employee.value;
+		this.appointment.customerName = this.form.controls['customerName'].value!;
+    this.appointment.serviceType = this.form.controls['serviceType'].value!;
+    this.appointment.date = this.form.controls['date'].value!;
+    this.appointment.employee = this.form.controls['employee'].value!;
     this.appointmentService.save(this.appointment);
     this.router.navigate(["appointments"]);
 	}

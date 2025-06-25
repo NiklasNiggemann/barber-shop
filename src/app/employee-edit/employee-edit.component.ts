@@ -13,10 +13,12 @@ import { AppRoutingModule } from '../app.routes';
   templateUrl: './employee-edit.component.html',
   styleUrl: './employee-edit.component.css'
 })
+
 export class EmployeeEditComponent implements OnInit {
 
   id!: number;
 	employee!: Employee;
+  form!: FormGroup;
 
 	constructor(private router: Router, private employeeService: EmployeeService, private route: ActivatedRoute) { }
 
@@ -29,19 +31,16 @@ export class EmployeeEditComponent implements OnInit {
       this.employee = new Employee(0,"", "");
     }
 
-    this.form.setValue({
-      "name": this.employee.name,
-      "surname": this.employee.surname
-    })
+    this.form = new FormGroup({
+      name: new FormControl(this.employee.name, [Validators.required, Validators.minLength(3)]),
+      surname: new FormControl(this.employee.surname, [Validators.required, Validators.minLength(3)])
+    });
   }
-  
-  form = new FormGroup({
-    name: new FormControl(),
-    surname: new FormControl()
-  });
+
+
 
 	onSubmit() {
-    this.employee = new Employee(this.id, this.form.controls.name.value, this.form.controls.surname.value);
+    this.employee = new Employee(this.id, this.form.controls['name'].value!, this.form.controls['surname'].value!);
     this.employeeService.save(this.employee);
     this.router.navigate(["employees"]);
 	}
