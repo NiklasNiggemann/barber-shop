@@ -1,0 +1,10 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="firstname">Name:</label>
+    <input type="text" class="form-control" id="name" formControlName="name">
+    <label for="surname">Surname:</label>
+    <input type="text" class="form-control" id="surname" formControlName="surname">
+  </div>
+  <button type="submit" class="btn btn-primary">Ok</button>
+  <button type="button" class="btn btn-success" (click)="onCancel()">Cancel</button>
+</form>

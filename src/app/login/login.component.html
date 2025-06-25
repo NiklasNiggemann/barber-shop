@@ -1,0 +1,19 @@
+<div class="container mt-5" style="max-width: 400px;">
+    <h2 class="text-center mb-4">Login to Your Account</h2>
+    <form>
+
+        <div class="mb-3">
+        <label for="email" class="form-label">Email address</label>
+        <input type="email" class="form-control" id="email" placeholder="Enter email" #email/>
+        </div>
+
+        <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <input type="password" class="form-control" id="password" placeholder="Enter password" #password/>
+        </div>
+
+        <button type="button" class="btn btn-primary w-100" (click)="onSubmit(email.value, password.value)">Login</button>
+        <div class="alert alert-danger mt-3" role="alert" *ngIf="login_error">A user with that email or password was not found!</div>
+  
+    </form>
+</div>

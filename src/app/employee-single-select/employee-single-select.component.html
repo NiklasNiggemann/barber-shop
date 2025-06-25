@@ -1,0 +1,6 @@
+<select (change)="onSelectionChanged($event)">
+  <option selected disabled>Please select an Employee!</option>
+  <option *ngFor="let employee of all" [value]="employee.id" [selected]="isSelected(employee)">
+    {{ employee.name }} {{ employee.surname }}
+  </option>
+</select>

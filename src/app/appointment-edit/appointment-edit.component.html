@@ -1,0 +1,14 @@
+<form [formGroup]="form" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label for="customerName">Customer Name:</label>
+    <input type="text" class="form-control" id="customerName" formControlName="customerName">
+    <label for="serviceType">Service:</label>
+    <input type="text" class="form-control" id="serviceType" formControlName="serviceType">
+    <label for="date">Date:</label>
+    <input type="date" class="form-control" id="date" formControlName="date">
+    <label for="employee">Employee:</label>
+    <app-employee-single-select formControlName="employee"></app-employee-single-select>
+  </div>
+  <button type="submit" class="btn btn-primary">Ok</button>
+  <button type="button" class="btn btn-success" (click)="onCancel()">Cancel</button>
+</form>
