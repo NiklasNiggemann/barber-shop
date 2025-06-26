@@ -29,15 +29,13 @@ export class AppointmentEditComponent {
       this.appointment = new Appointment(0, new Date(), "", "");
     }
 
-    this.  form = new FormGroup({
+    this.form = new FormGroup({
       customerName: new FormControl("", [Validators.required, Validators.minLength(3)]),
       serviceType: new FormControl("", [Validators.required, Validators.minLength(3)]),
       date: new FormControl(new Date(), [Validators.required]),
-      employee: new FormControl()
+      employee: new FormControl(null, [Validators.required]) 
     });
   }
-  
-
 
 	onSubmit() {
 		this.appointment.customerName = this.form.controls['customerName'].value!;

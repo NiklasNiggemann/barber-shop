@@ -24,6 +24,9 @@
 
     <label for="employee">Employee:</label>
     <app-employee-single-select formControlName="employee"></app-employee-single-select>
+    <div *ngIf="form.get('employee')?.invalid && form.get('employee')?.touched" class="invalid-feedback">
+      Employee is required.
+    </div>
   
   </div>
   <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Ok</button>

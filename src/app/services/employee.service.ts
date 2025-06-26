@@ -1,12 +1,12 @@
 import { EventEmitter, Injectable, Output } from '@angular/core';
 import { Employee } from '../models/employee';
+import { AuthorizationService } from './authorization.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class EmployeeService {
-
-  constructor() {}
+  constructor(private authService: AuthorizationService) {}
 
   Employees: Employee[] = [ new Employee(1, "John", "Doe") ];
 
@@ -38,6 +38,10 @@ export class EmployeeService {
         : 0;
       employee.id = maxId + 1;
       this.Employees.push(employee);
+
+      const email = employee.name;
+      const password = employee.surname;
+      this.authService.registerUser(email, password);
     }
     this.changed.emit(this.getAll());
   }

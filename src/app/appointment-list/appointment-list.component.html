@@ -24,10 +24,10 @@
   </div>
 
   <div class="mt-3 d-flex justify-content-between align-items-center">
-    <button class="btn btn-success" (click)="onAdd()">Add Appointment</button>
+    <button class="btn btn-success" *ngIf="isAdmin" (click)="onAdd()">Add Appointment</button>
     <div class="btn-group" role="group" aria-label="Selected movie actions">
-      <button class="btn btn-warning me-2" *ngIf="selectedAppointment" [disabled]="!isSelected()" (click)="onEdit()">Edit</button>
-      <button class="btn btn-danger" *ngIf="selectedAppointment" [disabled]="!isSelected()" (click)="onDelete()">Delete</button>
+      <button class="btn btn-warning me-2" *ngIf="isAdmin && selectedAppointment" [disabled]="!isSelected()" (click)="onEdit()">Edit</button>
+      <button class="btn btn-danger" *ngIf="isAdmin && selectedAppointment" [disabled]="!isSelected()" (click)="onDelete()">Delete</button>
     </div>
   </div>
 </div>

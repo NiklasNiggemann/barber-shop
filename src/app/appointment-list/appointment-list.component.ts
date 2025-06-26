@@ -17,10 +17,25 @@ export class AppointmentListComponent {
 
   appointments: any[] = [];
   selectedAppointment?: any;
+  isLoggedIn = false;
+  isAdmin = false;
 
   async ngOnInit() {
     this.appointments = this.appointmentService.getAll(); 
     this.appointmentService.changed.subscribe(() => { this.appointments = this.appointmentService.Appointments; });
+
+    this.updateAuthState();
+    this.auth.authChanged.subscribe(() => {
+      this.updateAuthState();
+    });
+
+    this.isLoggedIn = this.auth.isLoggedIn();
+    this.isAdmin = this.auth.isAdmin();
+  }
+
+  private updateAuthState(): void {
+    this.isLoggedIn = this.auth.isLoggedIn();
+    this.isAdmin = this.auth.isAdmin();
   }
 
   onDelete() { this.appointmentService.remove(this.selectedAppointment); }

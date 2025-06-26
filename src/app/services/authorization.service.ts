@@ -10,10 +10,10 @@ export enum AuthResult {
   providedIn: 'root'
 })
 export class AuthorizationService {
-  private readonly credentials = {
-    user: { email: 'test', password: 'test' },
-    admin: { email: 'admin', password: 'admin' }
-  };
+  private users: { email: string, password: string, isAdmin: boolean }[] = [
+    { email: 'test', password: 'test', isAdmin: false },
+    { email: 'admin', password: 'admin', isAdmin: true }
+  ];
 
   private loggedIn = false;
   private isAdminUser = false;
@@ -31,14 +31,11 @@ export class AuthorizationService {
   }
 
   login(email: string, password: string): AuthResult {
-    if (email === this.credentials.user.email && password === this.credentials.user.password) {
-      this.setAuthState(true, false);
-      return AuthResult.User;
-    }
+    const user = this.users.find(u => u.email === email && u.password === password);
 
-    if (email === this.credentials.admin.email && password === this.credentials.admin.password) {
-      this.setAuthState(true, true);
-      return AuthResult.Admin;
+    if (user) {
+      this.setAuthState(true, user.isAdmin);
+      return user.isAdmin ? AuthResult.Admin : AuthResult.User;
     }
 
     this.logout();
@@ -53,5 +50,10 @@ export class AuthorizationService {
     this.loggedIn = loggedIn;
     this.isAdminUser = isAdmin;
     this.authChanged.emit(loggedIn);
+  }
+
+  registerUser(email: string, password: string, isAdmin = false): void {
+    this.users.push({ email, password, isAdmin });
+    console.log(this.users);
   }
 }

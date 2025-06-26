@@ -26,6 +26,7 @@
     <div class="btn-group" role="group" aria-label="Selected movie actions">
       <button class="btn btn-warning me-2" *ngIf="isAdmin && selectedEmployee" [disabled]="!isSelected()" (click)="onEdit()">Edit</button>
       <button class="btn btn-danger" *ngIf="isAdmin && selectedEmployee" [disabled]="!isSelected()" (click)="onDelete()">Delete</button>
+      <button class="btn btn-success" *ngIf="selectedEmployee && !isAdmin" [disabled]="!isSelected()" (click)="onRequest()">Request Appointment</button>
     </div>
   </div>  
 </div>

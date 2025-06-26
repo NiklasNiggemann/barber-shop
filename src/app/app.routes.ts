@@ -11,6 +11,7 @@ import { DashboardComponent } from './dashboard/dashboard.component';
 import { TeamComponent } from './team/team.component';
 import { ContactComponent } from './contact/contact.component';
 import { AboutComponent } from './about/about.component';
+import { AppointmentRequestComponent } from './appointment-request/appointment-request.component';
 
 export const routes: Routes = 
 [
@@ -24,6 +25,7 @@ export const routes: Routes =
   { path: 'employees/:id', component: EmployeeEditComponent, canActivate:[RouteGuard]},
   { path: 'appointments', component: AppointmentListComponent, canActivate:[RouteGuard] },
   { path: 'appointments/:id', component: AppointmentEditComponent, canActivate:[RouteGuard] },
+  { path: 'appointments/request', component: AppointmentRequestComponent },
   { path: 'dashboard', component: DashboardComponent, canActivate:[RouteGuard] },
   { path: '**', redirectTo: '/home' } 
 ];

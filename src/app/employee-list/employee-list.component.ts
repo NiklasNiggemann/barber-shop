@@ -58,6 +58,10 @@ export class EmployeeListComponent implements OnInit {
     }
   }
 
+  onRequest() : void {
+    this.router.navigate(['/appointments/request']);
+  }
+
   onAdd(): void {
     if (this.isLoggedIn) {
       this.router.navigate(['/employees/0']);
