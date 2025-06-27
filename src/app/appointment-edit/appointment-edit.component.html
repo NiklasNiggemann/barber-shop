@@ -1,34 +1,60 @@
 <form [formGroup]="form" (ngSubmit)="onSubmit()">
-  <div class="form-group">
-    
-    <label for="customerName">Customer Name:</label>
-    <input type="text" class="form-control" id="customerName" formControlName="customerName" placeholder="Enter first name"
-           [ngClass]="{'is-invalid': form.get('customerName')?.invalid && form.get('customerName')?.touched}">
+  <div class="mb-3">
+    <label for="customerName" class="form-label">Customer Name:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="customerName"
+      formControlName="customerName"
+      placeholder="Enter first name"
+      [ngClass]="{'is-invalid': form.get('customerName')?.invalid && form.get('customerName')?.touched}"
+    />
     <div *ngIf="form.get('customerName')?.invalid && form.get('customerName')?.touched" class="invalid-feedback">
       Name is required and must be at least 3 characters long.
     </div>
+  </div>
 
-    <label for="serviceType">Service:</label>
-    <input type="text" class="form-control" id="serviceType" formControlName="serviceType" placeholder="Enter service type"
-           [ngClass]="{'is-invalid': form.get('serviceType')?.invalid && form.get('serviceType')?.touched}">
-    <div *ngIf="form.get('serviceType')?.invalid && form.get('serviceType')?.touched" class="invalid-feedback">
-      Service is required and must be at least 3 characters long.
+  <div class="mb-3">
+    <label for="serviceType" class="form-label">Service:</label>
+    <app-service-single-select
+      id="serviceType"
+      formControlName="serviceType"
+      class="form-control p-0"
+      [ngClass]="{'is-invalid': form.get('serviceType')?.invalid && form.get('serviceType')?.touched}"
+    ></app-service-single-select>
+    <div *ngIf="form.get('serviceType')?.invalid && form.get('serviceType')?.touched" class="invalid-feedback d-block">
+      Service is required.
     </div>
+  </div>
 
-    <label for="date">Date:</label>
-    <input type="date" class="form-control" id="date" formControlName="date" placeholder="Select date"
-           [ngClass]="{'is-invalid': form.get('date')?.invalid && form.get('date')?.touched}">
+  <div class="mb-3">
+    <label for="date" class="form-label">Date:</label>
+    <input
+      type="date"
+      class="form-control"
+      id="date"
+      formControlName="date"
+      placeholder="Select date"
+      [ngClass]="{'is-invalid': form.get('date')?.invalid && form.get('date')?.touched}"
+    />
     <div *ngIf="form.get('date')?.invalid && form.get('date')?.touched" class="invalid-feedback">
       Date is required.
     </div>
+  </div>
 
-    <label for="employee">Employee:</label>
-    <app-employee-single-select formControlName="employee"></app-employee-single-select>
-    <div *ngIf="form.get('employee')?.invalid && form.get('employee')?.touched" class="invalid-feedback">
+  <div class="mb-3">
+    <label for="employee" class="form-label">Employee:</label>
+    <app-employee-single-select
+      id="employee"
+      formControlName="employee"
+      class="form-control p-0"
+      [ngClass]="{'is-invalid': form.get('employee')?.invalid && form.get('employee')?.touched}"
+    ></app-employee-single-select>
+    <div *ngIf="form.get('employee')?.invalid && form.get('employee')?.touched" class="invalid-feedback d-block">
       Employee is required.
     </div>
-  
   </div>
-  <button type="submit" [disabled]="form.invalid" class="btn btn-primary">Ok</button>
-  <button type="button" class="btn btn-success" (click)="onCancel()">Cancel</button>
+
+  <button type="submit" [disabled]="form.invalid" class="btn btn-primary me-2">Ok</button>
+  <button type="button" class="btn btn-secondary" (click)="onCancel()">Cancel</button>
 </form>

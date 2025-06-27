@@ -7,6 +7,7 @@
           <th scope="col" style="width: 3rem;">#</th>
           <th scope="col">Customer</th>
           <th scope="col">Service</th>
+          <th scope="col">Price</th>
           <th scope="col">Date</th>
           <th scope="col">Employee</th>
         </tr>
@@ -15,7 +16,8 @@
         <tr *ngFor="let appointment of appointments; let i = index" (click)="onSelect(appointment)" [ngClass]="{ 'table-info': selectedAppointment === appointment }" style="cursor: pointer;">
           <th scope="row">{{ i + 1 }}</th>
           <td>{{ appointment.customerName }}</td>
-          <td>{{ appointment.serviceType }}</td>
+          <td>{{ appointment.serviceType.name }}</td>
+          <td>${{ appointment.serviceType.price }}</td>
           <td>{{ appointment.date }}</td>
           <td>{{ appointment.employee.name }} {{ appointment.employee.surname }}</td>
         </tr>

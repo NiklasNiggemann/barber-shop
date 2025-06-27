@@ -5,10 +5,11 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { EmployeeSingleSelectComponent } from "../employee-single-select/employee-single-select.component";
+import { ServiceSingleSelectComponent } from '../service-single-select/service-single-select.component';
 
 @Component({
   selector: 'app-appointment-edit',
-  imports: [ReactiveFormsModule, CommonModule, EmployeeSingleSelectComponent],
+  imports: [ReactiveFormsModule, CommonModule, EmployeeSingleSelectComponent, ServiceSingleSelectComponent],
   templateUrl: './appointment-edit.component.html',
   styleUrl: './appointment-edit.component.css'
 })
@@ -26,14 +27,14 @@ export class AppointmentEditComponent {
 		if (this.id != 0) {
       this.appointment = this.appointmentService.getById(this.id)!;
     } else { 
-      this.appointment = new Appointment(0, new Date(), "", "");
+      this.appointment = new Appointment(0, null, "", null);
     }
 
     this.form = new FormGroup({
-      customerName: new FormControl("", [Validators.required, Validators.minLength(3)]),
-      serviceType: new FormControl("", [Validators.required, Validators.minLength(3)]),
-      date: new FormControl(new Date(), [Validators.required]),
-      employee: new FormControl(null, [Validators.required]) 
+      customerName: new FormControl(this.appointment.customerName, [Validators.required, Validators.minLength(3)]),
+      serviceType: new FormControl(this.appointment.serviceType, [Validators.required]),
+      date: new FormControl(this.appointment.date, [Validators.required]),
+      employee: new FormControl(this.appointment.employee, [Validators.required]) 
     });
   }
 

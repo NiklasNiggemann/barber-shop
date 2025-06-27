@@ -1,0 +1,6 @@
+<select (change)="onSelectionChanged($event)">
+  <option selected disabled>Please select a Service!</option>
+  <option *ngFor="let service of all" [value]="service.name" [selected]="isSelected(service)">
+    {{ service.name }} - ${{ service.price }}
+  </option>
+</select>

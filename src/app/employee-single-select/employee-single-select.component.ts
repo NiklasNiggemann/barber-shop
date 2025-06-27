@@ -40,7 +40,6 @@ export class EmployeeSingleSelectComponent implements OnInit, ControlValueAccess
     }
   }
 
-  // ControlValueAccessor methods
   onChange: (employee: Employee | null) => void = () => {};
   onTouched: () => void = () => {};
 
@@ -56,12 +55,7 @@ export class EmployeeSingleSelectComponent implements OnInit, ControlValueAccess
     this.onTouched = fn;
   }
 
-  setDisabledState?(isDisabled: boolean): void {
-    // implement if you want to handle disabled state
-  }
-
   isSelected(employee: Employee): boolean {
     return this.selected != null && this.selected.id === employee.id;
   }
-
 }

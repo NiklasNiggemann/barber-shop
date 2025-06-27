@@ -6,6 +6,7 @@ import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angula
 import { CommonModule } from '@angular/common';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from '../app.routes';
+import { ServiceSingleSelectComponent } from '../service-single-select/service-single-select.component';
 
 @Component({
   selector: 'app-employee-edit',
@@ -37,8 +38,6 @@ export class EmployeeEditComponent implements OnInit {
     });
   }
 
-
-
 	onSubmit() {
     this.employee = new Employee(this.id, this.form.controls['name'].value!, this.form.controls['surname'].value!);
     this.employeeService.save(this.employee);
@@ -48,5 +47,4 @@ export class EmployeeEditComponent implements OnInit {
   onCancel() { 
     this.router.navigate(["employees"]); 
   }
-
 }
